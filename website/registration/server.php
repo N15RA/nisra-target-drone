@@ -12,10 +12,15 @@ $db = mysqli_connect('localhost', 'root', 'DreSf84331**', 'registration');
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
     // receive all input values from the form
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-    $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+    // $username = mysqli_real_escape_string($db, $_POST['username']);
+    // $email = mysqli_real_escape_string($db, $_POST['email']);
+    // $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+    // $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password_1 = $_POST['password_1'];
+    $password_2 = $_POST['password_2'];
 
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
@@ -63,11 +68,11 @@ if (isset($_POST['reg_user'])) {
 
 // LOGIN USER
 if (isset($_POST['login_user'])) {
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
+    // $username = mysqli_real_escape_string($db, $_POST['username']);
+    // $password = mysqli_real_escape_string($db, $_POST['password']);
 
-    echo($username);
-    echo($password);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     if (empty($username)) {
         array_push($errors, "Username is required");
