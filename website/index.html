@@ -5,33 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CrazyFire Lee, Cash Lu, Chess Kuo">
+    
+    <title>NISRA Target Server</title>
 
-    <title>NISRA</title>
-
+    <!-- Bootstrap Css -->
     <link rel="stylesheet" href="./styles/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles/styles.css">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Css -->
+    <link rel="stylesheet" href="./styles/style.css">
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="page-top">
     <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="./images/logos/logo-sm.png" alt="small nisra logo" width="35" height="35">
+                    <img src="./images/logos/logo-sm.png" alt="nisra logo" width="35" height="35">
                 </a>
-
+    
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Lessons</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Events</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 text-secondary" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Our-Story</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Members</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Lessons</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Events</a></li>
                 </ul>
-
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                </form>
-
+    
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2 text-white text-decoration-none"><a href="./registration/registration.php" class="text-white text-decoration-none">Registration</a></button>
+                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <button type="button" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>
         </div>
