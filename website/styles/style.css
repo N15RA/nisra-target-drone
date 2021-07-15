@@ -153,3 +153,8 @@ section.join-us hr.divider {
     margin: 1.5rem auto;
     opacity: 1;
 }
+
+footer {
+    color: #FFFFFF;
+    background-color: #242528;
+}
