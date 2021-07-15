@@ -39,12 +39,12 @@
             <h1 class="h3 mb-3 fw-normal">Sign In</h1>
 
             <div class="form-floating">
-                <input id="username" type="text" class="form-control" placeholder="Enter your username" name="username">
+                <input id="username" type="text" class="form-control" placeholder="Enter your username" name="username" required>
                 <label for="username">Username</label>
             </div>
 
             <div class="form-floating">
-                <input id="password" type="password" class="form-control login" placeholder="Enter your password" name="password">
+                <input id="password" type="password" class="form-control login" placeholder="Enter your password" name="password" required>
                 <label for="password">Password</label>
             </div>
 

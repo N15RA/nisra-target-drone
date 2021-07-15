@@ -39,19 +39,19 @@
             <h1 class="h3 mb-3 fw-normal">Register</h1>
 
             <div class="form-floating">
-                <input id="username" type="text" class="form-control" placeholder="Create your Username" name="username">
+                <input id="username" type="text" class="form-control" placeholder="Create your Username" name="username" required>
                 <label for="username">Username</label>
             </div>
             <div class="form-floating">
-                <input id="password" type="password" class="form-control" placeholder="Create your password" name="password">
+                <input id="password" type="password" class="form-control" placeholder="Create your password" name="password" required>
                 <label for="password">Password</label>
             </div>
             <div class="form-floating">
-                <input id="password" type="password" class="form-control" placeholder="Repeat your password" name="password_check">
+                <input id="password" type="password" class="form-control" placeholder="Repeat your password" name="password_check" required>
                 <label for="password">Repeat Password</label>
             </div>
             <div class="form-floating">
-                <input id="email" type="text" class="form-control" placeholder="Email" name="email">
+                <input id="email" type="text" class="form-control" placeholder="Email" name="email" required>
                 <label for="email">Email Address</label>
             </div>
 
