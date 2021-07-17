@@ -1,10 +1,6 @@
-<?php 
-    session_start(); 
+<?php
+    session_start();
 
-    if (!isset($_SESSION['username'])) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: register.php');
-    }
     if (isset($_GET['logout'])) {
         session_destroy();
         unset($_SESSION['username']);
@@ -19,35 +15,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CrazyFire Lee, Cash Lu, Chess Kuo">
+    
+    <title>NISRA Control Page</title>
 
-    <title>Home-page</title>
-
+    <!-- Bootstrap Css -->
     <link rel="stylesheet" href="../styles/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/regisration.css">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header>
-        <h1>Home page</h1>
-    </header>
-
     <main>
-        <!-- notification message -->
-        <?php if (isset($_SESSION['success'])) : ?>
-        <div class="error success" >
-        <h3>
-        <?php 
-            echo $_SESSION['success']; 
-            unset($_SESSION['success']);
-        ?>
-        </h3>
-        </div>
-        <?php endif ?>
-
-        <!-- logged in user information -->
-        <?php if (isset($_SESSION['username'])) : ?>
-            <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-            <p><a href="index.php?logout='1'" style="color: red;">logout</a></p>
-        <?php endif ?>
+        <section>
+            
+        </section>
     </main>
 </body>
 </html>
