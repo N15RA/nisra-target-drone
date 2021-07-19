@@ -137,10 +137,10 @@
                         <span>Lessons</span>
                     </a>
                 </li>
-                <li id="qas" class="nav-item">
+                <li id="exercises" class="nav-item">
                     <a class="nav-link text-white" href="/backstage/qas.php">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                        <span>Q&As</span>
+                        <span>Exercises</span>
                     </a>
                 </li>
             </ul>
