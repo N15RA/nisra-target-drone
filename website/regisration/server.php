@@ -8,7 +8,7 @@ $permission = 0;
 $errors = array();
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'registration');
+$db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
 
 // check database connection
 if (!$db) {
@@ -20,7 +20,7 @@ if (isset($_POST['reg_user'])) {
     
     // receive all input values from the from
     $username = $_POST['username'];
-    $email = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $password_check = $_POST['password_check'];
 
@@ -57,7 +57,7 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['username'] = $username;
         $_SESSION['permission'] = $permission;
         $_SESSION['success'] = "You are now logged in";
-        header('location: index.php');
+        header('location: ../index.php');
     }
 }
 
@@ -82,9 +82,20 @@ if (isset($_POST['login_user'])) {
         if (mysqli_num_rows($results) != 0) {
             $results = mysqli_fetch_assoc($results);
             $_SESSION['username'] = $results['username'];
-            $_SESSION['permission'] = $results['permission'];
             $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
+
+            if ($results['permission'] == 2) {
+                $user_check_query = "SELECT * FROM users";
+                $result = mysqli_query($db, $user_check_query);
+                
+                $members = array();
+                while ($user = mysqli_fetch_assoc($result)) {
+                    array_push($members, $user);
+                }
+                $_SESSION['members'] = $members;
+            }
+            $_SESSION['permission'] = $results['permission'];
+            header('location: ../index.php');
         } else {
             array_push($errors, "Wrong username/password combination");
         }
