@@ -1,3 +1,58 @@
+<?php
+    if (isset($_GET['update'])){
+        $errors = array();
+
+        $id = $_GET['id'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password_new = $_POST['password_new'];
+        $password_new_check = $_POST['password_new_check'];
+        $password_old = md5($_POST['password_old']);
+
+        if (!isset($_POST['update_user'])) {
+            $_SESSION['errors'] = $errors;
+        }
+
+        else if ($password_new != $password_new_check) {
+            array_push($errors, "New password not same");
+            $_SESSION['errors'] = $errors;
+        }
+
+        else {
+            // connect to the database
+            $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+            $user_check_query = "SELECT * FROM users WHERE id='$id'";
+            $result = mysqli_query($db, $user_check_query);
+            $user = mysqli_fetch_assoc($result);
+
+            if (!$user) {
+                array_push($errors, "No user");
+                $_SESSION['errors'] = $errors;
+            }
+
+            else if ($user['password'] != $password_old) {
+                array_push($errors, "Your original password is incorrect");
+                $_SESSION['errors'] = $errors;
+            }
+
+            else if ($user['username'] == $username and $user['email'] == $email and ($password_new == "")) {
+                array_push($errors, "Please entry what you want to change");
+                $_SESSION['errors'] = $errors;
+            }
+
+            else if ($password_new != "") {
+                $password_new = md5($password_new);
+                $update = "UPDATE users SET username='$username', password='$password_new', email='$email' WHERE id='$id'";
+                mysqli_query($db, $user_check_query);
+            }
+
+            else {
+                $update = "UPDATE users SET username='$username', email='$email' WHERE id='$id'";
+                mysqli_query($db, $user_check_query);
+            }
+        }
+    }
+?>
 <?php include('./server.php') ?>
 
 <!DOCTYPE html>
@@ -8,7 +63,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CrazyFire Lee, Cash Lu, Chess Kuo">
     
-    <title>NISRA Control Page</title>
+    <title>User Profile</title>
 
     <!-- Bootstrap Css -->
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
@@ -37,7 +92,6 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <!-- icons -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="home" viewBox="0 0 16 16">
             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
@@ -92,7 +146,7 @@
             <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
         </symbol>
     </svg>
-
+    
     <main class="container-fluid">
         <div class="row align-items-stretch justify-content-center">
             <!-- sidebar -->
@@ -141,7 +195,49 @@
                 </div>
             </section>
 
-            <!-- basic information -->
+            <!-- user setting block -->
+            <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <form action="./setting.php?id=<?php echo $id; ?>&update" method="POST">
+                    <h1>Setting</h1>
+
+                    <p class="text-warning">If you only need to change username or password, skip the input you don't need</p>
+                    <!-- change username -->
+                    <section class='username'>
+                        <label for="username">Name</label>
+                        <input type="text" name="username" id="username" value="<?php echo $username; ?>">
+                    </section>
+
+                    <!-- change email -->
+                    <section class='email'>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" value="<?php echo $email; ?>">
+                    </section>
+                    
+                    <!-- check password -->
+                    <section class='password_old'>
+                        <label for="password_old">Enter your old password</label>
+                        <input type="password" name="password_old" id="password_old" placeholder="Enter your old password" required>
+                    </section>
+
+                    <!-- new password -->
+                    <section class='password_new'>
+                        <label for="password_new">Enter your new password</label>
+                        <input type="password" name="password_new" id="password_new" placeholder="Enter your new password">
+                    </section>
+
+                    <!-- recheck new password -->
+                    <section class='password_new_check'>
+                        <label for="password_new_check">Repeat your new password</label>
+                        <input type="password" name="password_new_check" id="password_new_check" placeholder="Enter your new password">
+                    </section>
+
+                    <button type="submit" value="Update" name="update_user">
+                        Update User
+                    </button>
+                </form>
+
+                <?php include('errors.php'); ?>
+            </section>
         </div>
     </main>
 </body>
