@@ -36,11 +36,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link px-2 text-secondary" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="../story.html">Our-Story</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="../members.html">Members</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="../events.php">Events</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="../playground.html">Playground</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="../questions.html">Q&As</a></li>
                     </ul>
 
                     <button class="btn btn-outline-light me-2 justify-content-end" type="button">
@@ -58,49 +56,40 @@
         <div class="container">
             <div class="row g-5 align-items-center justify-content-center p-5">
                 <!-- title -->
-                <section class="col-12 text-center">
+                <section class="col-12 text-center p-3">
                     <h1>JavaScript 就是如此的華麗，想不到吧~</h1>
                 </section>
                 
                 <!-- JavaScript action block -->
-                <section class="col-6">
+                <section class="col-6 p-3">
                     <div class="row text-center">
                         <h2>如果你想改變旁邊的文字，你該怎麼改變?</h2>
-                        <p>在隔壁文字的 ID 是 <strong>change-me</strong> 的情況下，我們可以如何操作?</p>
-                        <code>let text = document.getElementById("change-me");</code>
                         <h3>What is the JS of the button</h3>
                         <div class="col-6 action-block">
                             <button id="turn-blue">Turn Text color blue</button>
                             <p>
-                                <code>let btn1 = document.getElementById("turn-blue");</code><br>
-                                <code>const turnTextBlue = () => text.style.color = "blue";</code><br>
-                                <code>btn1.onclick = turnTextBlue;</code>
+                                <code>text.style.color = "blue"</code><br>
                             </p>
                         </div>
                         <div class="col-6 action-block">
                             <button id="turn-bold">Trun Text bold</button>
                             <p>
-                                <code>let btn2 = document.getElementById("turn-bold");</code><br>
-                                <code>const turnTextBold = () => text.style.fontWeight = "bold";</code><br>
-                                <code>btn2.onclick = turnTextBold;</code>
+                                <code>text.style.fontWeight = "bold"</code>
                             </p>
                         </div>
                         <div class="col-6 action-block">
                             <button id="change-size">Make Text size big</button>
                             <p>
-                                <code>let btn3 = document.getElementById("change-size");</code><br>
-                                <code>const turnTextBold = () => text.style.fontWeight = "bold";</code><br>
-                                <code>btn3.onclick = turnTextBold;</code>
+                                <code>text.style.fontSize  = "xx-large"</code>
                             </p>
                         </div>
                         <div class="col-6 action-block overflow-auto">
                             <button id="do-something">Do Something</button>
-                            <p>The id of the button is <code>do-something</code></p>
                             <br>
                             <code><?php echo $jsCode; ?></code>
                             <form action="./web-2.php" method="POST">
                                 <section class="javaScript-code">
-                                    <label for="javaScript">Anything else you want to add?</label>
+                                    <label for="javaScript">Anything else you want to addit?</label>
                                     <br>
                                     <textarea id="javaScript" name="javaScript" rows="5" cols="30"></textarea>
                                 </section>
@@ -173,7 +162,9 @@
     const turnTextSize = () => text.style.fontSize  = "xx-large";
     btn3.onclick = turnTextSize;
 
-    <?php echo $jsCode; ?>
+    let btn4 = document.getElementById("do-something");
+    const turnText = () => <?php echo $jsCode; ?>;
+    btn4.onclick = turnText;
 
     // reset button
     let btn5 = document.getElementById("reset");
