@@ -29,4 +29,6 @@
     $username = $user['username'];
     $email = $user['email'];
     $permission = $user['permission'];
+
+    mysqli_close($db);
 ?>

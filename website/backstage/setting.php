@@ -1,5 +1,5 @@
 <?php
-    if (isset($_GET['update'])){
+    if (isset($_POST['update_user'])){
         $errors = array();
 
         $id = $_GET['id'];
@@ -9,13 +9,8 @@
         $password_new_check = $_POST['password_new_check'];
         $password_old = md5($_POST['password_old']);
 
-        if (!isset($_POST['update_user'])) {
-            $_SESSION['errors'] = $errors;
-        }
-
-        else if ($password_new != $password_new_check) {
+        if ($password_new != $password_new_check) {
             array_push($errors, "New password not same");
-            $_SESSION['errors'] = $errors;
         }
 
         else {
@@ -52,6 +47,8 @@
             }
         }
     }
+    
+    mysqli_close($db);
 ?>
 <?php include('./server.php') ?>
 
@@ -197,7 +194,7 @@
 
             <!-- user setting block -->
             <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
-                <form action="./setting.php?id=<?php echo $id; ?>&update" method="POST">
+                <form action="./setting.php?id=<?php echo $id; ?>" method="POST">
                     <h1>Setting</h1>
 
                     <p class="text-warning">If you only need to change username or password, skip the input you don't need</p>

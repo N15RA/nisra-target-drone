@@ -1,3 +1,33 @@
+<?php
+    if (isset($_POST['add_event'])){
+        $errors = array();
+
+        $id = $_GET['id'];
+        $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+        $user_check_query = "SELECT * FROM users WHERE id='$id'";
+        $result = mysqli_query($db, $user_check_query);
+        $user = mysqli_fetch_assoc($result);
+
+        if ($user['permission'] < 1) {
+            array_push($errors, "You have no permission to add event");
+            $_SESSION['errors'] = $errors;
+        } else {
+            $title = $_POST['title'];
+            $date = $_POST['date'];
+            $info = $_POST['info'];
+            $notes = $_POST['notes'];
+
+            $event_query = "INSERT INTO events (title, event_date, info, notes, create_time)
+                            VALUES('$title', '$date', '$info', '$notes', null)";
+            $result = mysqli_query($db, $event_query);
+            if (!$result) {
+                array_push($errors, "Insert crash");
+            }
+        }
+    }
+    
+    mysqli_close($db);
+?>
 <?php include('./server.php') ?>
 
 <!DOCTYPE html>
@@ -141,7 +171,40 @@
                 </div>
             </section>
 
-            <!-- basic information -->
+            <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <h1>New Events</h1>
+                <form action="./events.php?id=<?php echo $id; ?>" method="POST">
+                    <!-- event title -->
+                    <section class="title">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" required>
+                    </section>
+
+                    <!-- event date -->
+                    <section class="date">
+                        <label for="date">Event Date</label>
+                        <input type="datetime-local" name="date" id="date" required>
+                    </section>
+
+                    <!-- event info  -->
+                    <section class="info">
+                        <label for="info">Event Info</label>
+                        <textarea type="text" name="info" id="info" rows="3" cols="40" required></textarea>
+                    </section>
+
+                    <!-- event notes  -->
+                    <section class="notes">
+                        <label for="notes">Event Notes</label>
+                        <textarea type="text" name="notes" id="notes" rows="3" cols="40"></textarea>
+                    </section>
+
+                    <div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit" value="Create Event" name="add_event">
+                            Create Event
+                        </button>
+                    </div>
+                </form>
+            </section>
         </div>
     </main>
 </body>

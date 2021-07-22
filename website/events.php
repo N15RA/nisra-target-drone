@@ -1,3 +1,11 @@
+<?php
+    $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+    $query = "SELECT * FROM events ORDER BY event_date";
+    $result = mysqli_query($db, $query);
+    $rowcount = mysqli_num_rows($result);
+
+    mysqli_close($db);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +40,7 @@
                         <li class="nav-item"><a class="nav-link px-2 text-secondary" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="./story.html">Our-Story</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="./members.html">Members</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="./events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-white" href="./events.php">Events</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="./playground.html">Playground</a></li>
                         <li class="nav-item"><a class="nav-link px-2 text-white" href="./questions.html">Q&As</a></li>
                     </ul>
@@ -49,7 +57,33 @@
     </header>
 
     <main>
+        <section>
+            <div class="container">
+                <div class="row g-5 align-items-center justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <!-- events -->
+                        <h1>Events We Hold~</h1>
 
+                        <?php 
+                        for ($i = 0; $i < $rowcount; $i++ ) { 
+                            $eventinfo = mysqli_fetch_assoc($result);
+                        ?>
+                        <article class="blog-post">
+                            <h2 class="blog-post-title"><?php echo $eventinfo['title']; ?></h2>
+                            <p class="blog-post-meta"><?php echo $eventinfo['event_date']; ?></p>
+                            <hr>
+                            <blockquote class="blockquote">
+                                <p><?php echo $eventinfo['info']; ?></p>
+                            </blockquote>
+                            <p><?php echo $eventinfo['notes']; ?></p>
+                        </article>
+                        <?php 
+                        } 
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="text-center text-lg-start text-muted">

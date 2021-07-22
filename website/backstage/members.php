@@ -1,4 +1,54 @@
+<?php
+    if (isset($_POST['update_user'])){
+        // $errors = array();
+
+        // // connect to the database
+        // $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+        // $update = "UPDATE users SET username='$username', password='$password_new', email='$email' WHERE id='$id'";
+        // $result = mysqli_query($db, $user_check_query);
+        // $user = mysqli_fetch_assoc($result);
+
+        // if (!$user) {
+        //     array_push($errors, "No user");
+        //     $_SESSION['errors'] = $errors;
+        // }
+
+        // else if ($user['password'] != $password_old) {
+        //     array_push($errors, "Your original password is incorrect");
+        //     $_SESSION['errors'] = $errors;
+        // }
+
+        // else if ($user['username'] == $username and $user['email'] == $email and ($password_new == "")) {
+        //     array_push($errors, "Please entry what you want to change");
+        //     $_SESSION['errors'] = $errors;
+        // }
+
+        // else if ($password_new != "") {
+        //     $password_new = md5($password_new);
+        //     $update = "UPDATE users SET username='$username', password='$password_new', email='$email' WHERE id='$id'";
+        //     mysqli_query($db, $user_check_query);
+        // }
+
+        // else {
+        //     $update = "UPDATE users SET username='$username', email='$email' WHERE id='$id'";
+        //     mysqli_query($db, $user_check_query);
+        // }
+    }
+    
+    mysqli_close($db);
+?>
 <?php include('./server.php') ?>
+<?php
+    if ($permission == 2) {
+        $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+        $query = "SELECT * FROM users";
+        $result = mysqli_query($db, $query);
+        
+        $rowcount = mysqli_num_rows($result);  // 取得記錄數
+    }
+
+    mysqli_close($db);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +191,40 @@
                 </div>
             </section>
 
-            <!-- basic information -->
+            <!-- member table -->
+            <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <form action="./members.php?id=<?php echo $id; ?>" method="POST">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th><label for="permission">Permission</label></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php 
+                                for ($i = 0; $i < $rowcount; $i++ ) { 
+                                    $userinfo = mysqli_fetch_assoc($result);
+                            ?>
+                            <tr>
+                                <th><?php echo $userinfo['username']; ?></th>
+                                <th><?php echo $userinfo['email']; ?></th>
+                                <?php if ($userinfo['permission'] >= $permission) { ?>
+                                    <th><?php echo $userinfo['permission']; ?></th>
+                                <?php } else { ?>
+                                    <th><input type="number" name="permission" id="permission" step="1" min="0" max="2" value="<?php echo $userinfo['permission']; ?>"></th>
+                                <?php } ?>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <button type="submit" value="Update" name="update_user">
+                        Update User
+                    </button>
+                </form>
+            </section>
         </div>
     </main>
 </body>

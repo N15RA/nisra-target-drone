@@ -49,12 +49,16 @@
 
         // register user if there are no errors in the form
         if (count($errors) == 0) {
-            $password_encrypt = md5($password);
+            $password = md5($password);
 
             $query = "INSERT INTO users (username, password, email, permission)
-                        VALUES('$username', '$password_encrypt', '$email', '$permission')";
+                        VALUES('$username', '$password', '$email', '$permission')";
             mysqli_query($db, $query);
             $_SESSION['success'] = "You are now logged in";
+
+            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+            $results = mysqli_query($db, $query);
+            $results = mysqli_fetch_assoc($results);
 
             $url = "../backstage/index.php?id=".$results['id'];
             header('location: '.$url);
