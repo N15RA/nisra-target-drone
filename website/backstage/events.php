@@ -151,10 +151,10 @@
                             <span>Events</span>
                         </a>
                     </li>
-                    <li id="questions" class="nav-item">
-                        <a class="nav-link text-white" href="./questions.php?id=<?php echo $id; ?>">
+                    <li id="fileUpload" class="nav-item">
+                        <a class="nav-link text-white" href="./fileUpload.php?id=<?php echo $id; ?>">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                            <span>Q&As</span>
+                            <span>File-Upload</span>
                         </a>
                     </li>
                 </ul>

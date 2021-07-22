@@ -1,3 +1,26 @@
+<?php
+    $errors = array();
+
+    if ($_FILES['my_file']['error'] === UPLOAD_ERR_OK){
+        echo 'file name: ' . $_FILES['my_file']['name'] . '<br/>';
+        echo 'file type: ' . $_FILES['my_file']['type'] . '<br/>';
+        echo 'file size: ' . ($_FILES['my_file']['size'] / 1024) . ' KB<br/>';
+        echo 'file temp name: ' . $_FILES['my_file']['tmp_name'] . '<br/>';
+
+        # 檢查檔案是否已經存在
+        if (file_exists('upload/' . $_FILES['my_file']['name'])){
+            echo 'file exist <br/>';
+        } else {
+            $file = $_FILES['my_file']['tmp_name'];
+            $dest = 'upload/' . $_FILES['my_file']['name'];
+
+            # 將檔案移至指定位置
+            move_uploaded_file($file, $dest);
+        }
+    } else {
+        array_push($errors, $_FILES['my_file']['error']);
+    }
+?>
 <?php include('./server.php') ?>
 
 <!DOCTYPE html>
@@ -121,10 +144,10 @@
                             <span>Events</span>
                         </a>
                     </li>
-                    <li id="questions" class="nav-item">
-                        <a class="nav-link text-white" href="./questions.php?id=<?php echo $id; ?>">
+                    <li id="fileUpload" class="nav-item">
+                        <a class="nav-link text-white" href="./fileUpload.php?id=<?php echo $id; ?>">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                            <span>Q&As</span>
+                            <span>File-Upload</span>
                         </a>
                     </li>
                 </ul>
@@ -141,7 +164,15 @@
                 </div>
             </section>
 
-            <!-- basic information -->
+            <!-- user setting block -->
+            <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <form method="post" enctype="multipart/form-data" action="upload.php">
+                    <input type="file" name="my_file">
+                    <input type="submit" value="Upload">
+                </form>
+
+                <?php include('errors.php'); ?>
+            </section>
         </div>
     </main>
 </body>
