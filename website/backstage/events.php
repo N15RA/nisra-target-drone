@@ -3,7 +3,7 @@
         $errors = array();
 
         $id = $_GET['id'];
-        $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+        $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
         $user_check_query = "SELECT * FROM users WHERE id='$id'";
         $result = mysqli_query($db, $user_check_query);
         $user = mysqli_fetch_assoc($result);
@@ -17,8 +17,8 @@
             $info = $_POST['info'];
             $notes = $_POST['notes'];
 
-            $event_query = "INSERT INTO events (title, event_date, info, notes, create_time)
-                            VALUES('$title', '$date', '$info', '$notes', null)";
+            $event_query = "INSERT INTO events (title, event_date, info, notes)
+                            VALUES('$title', '$date', '$info', '$notes')";
             $result = mysqli_query($db, $event_query);
             if (!$result) {
                 array_push($errors, "Insert crash");
@@ -203,7 +203,8 @@
                             Create Event
                         </button>
                     </div>
-                </form>
+		</form>
+		<?php include('errors.php'); ?>
             </section>
         </div>
     </main>

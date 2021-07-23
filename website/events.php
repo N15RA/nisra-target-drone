@@ -1,5 +1,5 @@
 <?php
-    $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+    $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
     $query = "SELECT * FROM events ORDER BY event_date DESC";
     $result = mysqli_query($db, $query);
     $rowcount = mysqli_num_rows($result);
@@ -57,10 +57,10 @@
     <main>
         <section>
             <div class="container">
-                <div class="row g-5 align-items-center justify-content-center">
-                    <div class="col-md-8 text-center">
+                <div class="row g-5 align-items-center justify-content-center p-3">
+                    <div class="col-md-8 text-center p-3">
                         <!-- events -->
-                        <h1>Events We Hold~</h1>
+                        <h1 class="p-3">Events We Hold~</h1>
 
                         <?php 
                         for ($i = 0; $i < $rowcount; $i++ ) { 

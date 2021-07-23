@@ -139,7 +139,7 @@
         </div>
     </footer>
 
-    <script src="./scripts/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/bootstrap.bundle.min.js"></script>
 </body>
 <script>
     let text = document.getElementById("change-me");
@@ -163,7 +163,7 @@
     btn3.onclick = turnTextSize;
 
     let btn4 = document.getElementById("do-something");
-    const turnText = () => <?php echo $jsCode; ?>;
+    const turnText = () => { <?php echo $jsCode; ?> };
     btn4.onclick = turnText;
 
     // reset button

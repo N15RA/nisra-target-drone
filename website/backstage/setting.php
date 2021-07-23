@@ -15,7 +15,7 @@
 
         else {
             // connect to the database
-            $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+            $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
             $user_check_query = "SELECT * FROM users WHERE id='$id'";
             $result = mysqli_query($db, $user_check_query);
             $user = mysqli_fetch_assoc($result);
