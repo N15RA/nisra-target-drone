@@ -71,6 +71,7 @@
                 <section class="col-6 p-3">
                     <div class="row text-center">
                         <h2>如果你想改變旁邊的文字，你該怎麼改變?</h2>
+                        <p>可以參考: <a href="https://www.w3schools.com/jsref/dom_obj_style.asp">https://www.w3schools.com/jsref/dom_obj_style.asp</a></p>
                         <h3>What is the JS of the button</h3>
                         <div class="col-6 action-block">
                             <button id="turn-blue">Turn Text color blue</button>
