@@ -1,6 +1,13 @@
 <?php
+    $jsCode = '';
+    $check = 0;
     if (isset($_POST['add_javascript'])) {
         $jsCode = $_POST['javaScript'];
+    }
+
+    if (substr($jsCode, 0, 5) == 'alert') {
+        $check = 1;
+        $flag = 'NISRA{Xss_is_great}';
     }
 ?>
 
@@ -163,13 +170,19 @@
     btn3.onclick = turnTextSize;
 
     let btn4 = document.getElementById("do-something");
-    const turnText = () => { <?php echo $jsCode; ?> };
+    const turnText = () => { 
+        if (<?php echo $check; ?>) {
+            alert('<?php echo $flag; ?>');
+        } else {
+            <?php echo $jsCode; ?>;
+        }
+    };
     btn4.onclick = turnText;
 
     // reset button
     let btn5 = document.getElementById("reset");
     const resetText = () => {
-        location.reload();
+        window.location.replace(window.location.href);  //刷新當前頁
     };
     btn5.onclick = resetText;
 </script>
