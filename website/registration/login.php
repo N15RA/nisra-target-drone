@@ -1,4 +1,4 @@
-<?php include('/registration/server.php') ?>
+<?php include('./server.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +39,7 @@
             </div>
         </form>
 
-        <?php include('/registration/errors.php'); ?>
+        <?php include('./errors.php'); ?>
 
         <hr>
 
