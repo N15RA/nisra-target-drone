@@ -185,6 +185,7 @@
 
             <!-- member table -->
             <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <p>Your ID is: <?php echo $user['id']; ?></p>
                 <form action="./members.php?id=<?php echo $id; ?>" method="POST">
                     <table>
                         <thead>
