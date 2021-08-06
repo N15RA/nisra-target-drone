@@ -142,6 +142,10 @@
             </section>
 
             <!-- basic information -->
+            <h1>Hi~ Welcome back <?php echo $username; ?></h1>
+            <h2>Check out basic information to make sure you have the permission to do something</h2>
+            <h3>Your email address is <?php echo $email; ?></h3>
+            <h3>Your permission is <?php echo $permission; ?></h3>
         </div>
     </main>
 </body>
