@@ -142,10 +142,12 @@
             </section>
 
             <!-- basic information -->
-            <h1>Hi~ Welcome back <?php echo $username; ?></h1>
-            <h2>Check out basic information to make sure you have the permission to do something</h2>
-            <h3>Your email address is <?php echo $email; ?></h3>
-            <h3>Your permission is <?php echo $permission; ?></h3>
+            <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
+                <h1>Hi~ Welcome back <?php echo $username; ?></h1>
+                <h2>Check out basic information to make sure you have the permission to do something</h2>
+                <h3>Your email address is <?php echo $email; ?></h3>
+                <h3>Your permission is <?php echo $permission; ?></h3>
+            </section>
         </div>
     </main>
 </body>
