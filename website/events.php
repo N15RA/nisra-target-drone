@@ -21,6 +21,17 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/styles/styles.css">
+    
+    <script>
+        let theFlag = 'XS]\\K]~y|kqoib}}i;}i`o|iZ:o|pv';
+        let _old_alert = window.alert;
+        let showFlag = false;
+        window.alert = function() {
+            // run some code when the alert pops up
+            showFlag = true;
+            _old_alert.apply(window, arguments);
+        };
+    </script>
 </head>
 
 <body>
@@ -111,15 +122,6 @@
     <script src="/scripts/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    let theFlag = 'XS]\\K]~y|kqoib}}i;}i`o|iZ:o|pv';
-    let _old_alert = window.alert;
-    let showFlag = false;
-    window.alert = function() {
-        // run some code when the alert pops up
-        showFlag = true;
-        _old_alert.apply(window, arguments);
-    };
-
     if( showFlag == true ){
         let flag = '';
         for (let i = 0; i < theFlag.length; i++) {
