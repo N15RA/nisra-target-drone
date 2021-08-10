@@ -21,7 +21,7 @@
     $id = $_GET['id'];
     // connect to the database
     $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
-    $query = "SELECT * FROM users WHERE id=$id";
+    $query = "SELECT * FROM users WHERE id='$id'";
     $result = mysqli_query($db, $query);
     $user = mysqli_fetch_assoc($result);
 
