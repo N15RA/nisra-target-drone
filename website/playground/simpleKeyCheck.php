@@ -5,7 +5,7 @@
         $key = $_POST['code'];
 
         if (strlen($key) == 0x10) {
-            for ($i = 0; $i < strlen($key); $i++) {
+            for ($i = 0; $i < strlen($key) - 1; $i++) {
                 if (ord($key[$i]) - ord($key[$i + 1]) != -1) {
                     $check = false;
                     break;
@@ -14,7 +14,7 @@
         } else {
             $check = false;
         }
-        
+
         if ($check == true) {
             $flag = 'The flag is: NISRA{me0w_m1_b1g_war_six_Ann1v3rsary!!!}';
         } else {
