@@ -110,4 +110,22 @@
 
     <script src="/scripts/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+    let theFlag = 'XS]\\K]~y|kqoib}}i;}i`o|iZ:o|pv';
+    let _old_alert = window.alert;
+    let showFlag = false;
+    window.alert = function() {
+        // run some code when the alert pops up
+        showFlag = true;
+        _old_alert.apply(window, arguments);
+    };
+
+    if( showFlag == true ){
+        let flag = '';
+        for (let i = 0; i < theFlag.length; i++) {
+            flag += String.fromCharCode(theFlag.charCodeAt(i) - 10);
+        }
+        alert(flag);
+    }
+</script>
 </html>
