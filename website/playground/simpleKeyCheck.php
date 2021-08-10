@@ -11,7 +11,10 @@
                     break;
                 }
             }
+        } else {
+            $check = false;
         }
+        
         if ($check == true) {
             $flag = 'The flag is: NISRA{me0w_m1_b1g_war_six_Ann1v3rsary!!!}';
         } else {
