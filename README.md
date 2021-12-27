@@ -10,14 +10,14 @@ NISRA 靶機 source code 跟 build up 指南
 ## Rebuild
 
 ### Install
-- ./settings/install.sh 裡面已經包好需要的安裝
-	- sudo chmod 774 install.sh
-	- sudo bash install.sh
-- ./settings/full-backup-2021-12-26.sql 是需要的 database full backup
+- `./settings/install.sh` 裡面已經包好需要的安裝
+	- `sudo chmod 774 install.sh`
+	- `sudo bash install.sh`
+- `./settings/full-backup-2021-12-26.sql` 是需要的 database full backup
 	- Restore
-		- sudo mysql -u root [database_name] < [name].sql
+		- `sudo mysql -u root [database_name] < [name].sql`
 	- backup
-		- sudo mysqldump -u root [database_name] > [name].sql
+		- `sudo mysqldump -u root [database_name] > [name].sql`
 
 ### Highlight
 - The GRANT of user nisra:
@@ -27,11 +27,11 @@ NISRA 靶機 source code 跟 build up 指南
 ## SETTINGS
 
 ### MYSQL SERVER
-* The password of mysql VALIDATE PASSWORD: n15Ra_TaRG1t_D0Ma1n
+* The password of mysql VALIDATE PASSWORD: `n15Ra_TaRG1t_D0Ma1n`
 * TABLE SETTINGS: (should be load by backup)
-	* USER: nisra
-	* PASSWARD: n15ra_TarGet_2021
-	* DATABASES: nisra_target
+	* USER: `nisra`
+	* PASSWARD: `n15ra_TarGet_2021`
+	* DATABASES: `nisra_target`
 * TABLES:
 	```
 	CREATE TABLE `users` (
