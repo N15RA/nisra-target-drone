@@ -33,6 +33,7 @@ NISRA 靶機 source code 跟 build up 指南
 	* PASSWARD: n15ra_TarGet_2021
 	* DATABASES: nisra_target
 * TABLES:
+	```
 	CREATE TABLE `users` (
 		`id` int unsigned NOT NULL AUTO_INCREMENT,
 		`username` varchar(50) NOT NULL,
@@ -41,6 +42,8 @@ NISRA 靶機 source code 跟 build up 指南
 		`permission` int NOT NULL,
 		PRIMARY KEY (`id`)
 	);
+	```
+	```
 	CREATE TABLE `events` (
 		`id` int unsigned NOT NULL AUTO_INCREMENT,
 		`title` varchar(150) NOT NULL,
@@ -49,3 +52,4 @@ NISRA 靶機 source code 跟 build up 指南
 		`notes` varchar(1500),
 		PRIMARY KEY (`id`)
 	);
+	```
