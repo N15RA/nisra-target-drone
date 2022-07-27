@@ -3,9 +3,9 @@ NISRA 靶機 source code 跟 build up 指南
 
 ## Requirement
 - ubuntu server (version: 20.04)
-- apache http server
-- php
-- mysql
+- apache http server (version: 2.4.41 (ubuntu))
+- php (version: 7.4.3)
+- mysql (version: 8.0.28)
 
 ## Rebuild
 
