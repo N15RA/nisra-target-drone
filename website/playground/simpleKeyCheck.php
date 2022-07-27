@@ -1,11 +1,28 @@
 <?php
-    $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
-    $query = "SELECT * FROM events ORDER BY event_date DESC";
-    $result = mysqli_query($db, $query);
-    $rowcount = mysqli_num_rows($result);
+    $userInput = '';
+    $check = true;
+    if (isset($_POST['submit_code'])) {
+        $key = $_POST['code'];
 
-    mysqli_close($db);
+        if (strlen($key) == 0x10) {
+            for ($i = 0; $i < strlen($key) - 1; $i++) {
+                if (ord($key[$i]) - ord($key[$i + 1]) != -1) {
+                    $check = false;
+                    break;
+                }
+            }
+        } else {
+            $check = false;
+        }
+
+        if ($check == true) {
+            $flag = 'The flag is: NISRA{me0w_m1_b1g_war_six_Ann1v3rsary!!!}';
+        } else {
+            $flag = 'Sorry, the code is incorrect';
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +31,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CrazyFire Lee, Cash Lu, Chess Kuo">
 
-    <title>Events</title>
+    <title>Playground</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/styles/styles.css">
-    
-    <script>
-        let theFlag = 'XS]\\K]~y|kqoib}}i;}i`o|iZ:o|pv';
-        let _old_alert = window.alert;
-        let showFlag = false;
-        window.alert = function() {
-            // run some code when the alert pops up
-            showFlag = true;
-            _old_alert.apply(window, arguments);
-        };
-    </script>
 </head>
 
 <body>
@@ -66,33 +72,40 @@
     </header>
 
     <main>
-        <section>
-            <div class="container">
-                <div class="row g-5 align-items-center justify-content-center p-3">
-                    <div class="col-md-8 text-center p-3">
-                        <!-- events -->
-                        <h1 class="p-3">Events We Hold~</h1>
+        <div class="container p-3">
+            <div class="row g-5 align-items-center justify-content-center p-3">
+                <div class="col-md-8 text-center p-3">
+                    <h1>貓咪大戰爭牛肉麵~大~大~大優惠-加碼</h1>
 
-                        <?php 
-                        for ($i = 0; $i < $rowcount; $i++ ) { 
-                            $eventinfo = mysqli_fetch_assoc($result);
-                        ?>
-                        <article class="blog-post">
-                            <h2 class="blog-post-title"><?php echo $eventinfo['title']; ?></h2>
-                            <p class="blog-post-meta"><?php echo $eventinfo['event_date']; ?></p>
-                            <hr>
-                            <blockquote class="blockquote">
-                                <p><?php echo $eventinfo['info']; ?></p>
-                            </blockquote>
-                            <p><?php echo $eventinfo['notes']; ?></p>
-                        </article>
-                        <?php 
-                        } 
-                        ?>
-                    </div>
+                    <p>
+                        貓咪大戰爭六周年，NISRA決定要加碼優惠給積極參與的社員們 <br>
+                        ，活動期間只要社員輸入我們配發的優惠碼即可兌換 Flag! <br>
+                        (偷偷跟你說，之前我用SimpleKeyCheck 這支程式測試過，不過我把它藏在我的電腦根目錄的/flag.txt裡了) <br>
+                        輸入禮包碼的輸入框，和一支check禮包碼的php
+                    </p>
+
+                    <form action="simpleKeyCheck.php" method="POST">
+                        <section class="user-code">
+                            <label for="code">The code you get?</label>
+                            <br>
+                            <input id="code" type="text" placeholder="Enter your code" name="code" required>
+                        </section>
+
+                        <section class="submission">
+                            <button type="submit" value="Check Code" name="submit_code">
+                                Check Code
+                            </button>
+                        </section>
+                    </form>
+
+                    <hr>
+
+                    <?php if (isset($_POST['submit_code'])) { ?>
+                        <p><?php echo $flag; ?></p>
+                    <?php } ?>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer class="text-center text-lg-start text-muted">
@@ -121,13 +134,4 @@
 
     <script src="/scripts/bootstrap.bundle.min.js"></script>
 </body>
-<script>
-    if( showFlag == true ){
-        let flag = '';
-        for (let i = 0; i < theFlag.length; i++) {
-            flag += String.fromCharCode(theFlag.charCodeAt(i) - 10);
-        }
-        alert(flag);
-    }
-</script>
 </html>

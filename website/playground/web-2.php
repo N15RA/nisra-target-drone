@@ -1,6 +1,13 @@
 <?php
+    $jsCode = '';
+    $check = 0;
     if (isset($_POST['add_javascript'])) {
         $jsCode = $_POST['javaScript'];
+    }
+
+    if (substr($jsCode, 0, 5) == 'alert') {
+        $check = 1;
+        $flag = 'NISRA{Xss_is_great}';
     }
 ?>
 
@@ -15,10 +22,10 @@
     <title>Playground</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
 <body>
@@ -26,7 +33,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img src="../images/logos/logo-sm.png" alt="nisra logo" width="35" height="35">
+                    <img src="/images/logos/logo-sm.png" alt="nisra logo" width="35" height="35">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,16 +43,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link px-2 text-secondary" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="../members.html">Members</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="../events.php">Events</a></li>
-                        <li class="nav-item"><a class="nav-link px-2 text-white" href="../playground.html">Playground</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-white" href="/members.html">Members</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-white" href="/events.php">Events</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-white" href="/playground.html">Playground</a></li>
                     </ul>
 
                     <button class="btn btn-outline-light me-2 justify-content-end" type="button">
-                        <a class="text-decoration-none text-white" href="./registration/login.php">Login</a>
+                        <a class="text-decoration-none text-white" href="/registration/login.php">Login</a>
                     </button>
                     <button class="btn btn-outline-warning me-2 justify-content-end" type="button" >
-                        <a class="text-decoration-none text-warning" href="./registration/register.php">Sign-Up</a>
+                        <a class="text-decoration-none text-warning" href="/registration/register.php">Sign-Up</a>
                     </button>
                 </div>
             </div>
@@ -64,6 +71,7 @@
                 <section class="col-6 p-3">
                     <div class="row text-center">
                         <h2>如果你想改變旁邊的文字，你該怎麼改變?</h2>
+                        <p>可以參考: <a href="https://www.w3schools.com/jsref/dom_obj_style.asp">https://www.w3schools.com/jsref/dom_obj_style.asp</a></p>
                         <h3>What is the JS of the button</h3>
                         <div class="col-6 action-block">
                             <button id="turn-blue">Turn Text color blue</button>
@@ -87,7 +95,7 @@
                             <button id="do-something">Do Something</button>
                             <br>
                             <code><?php echo $jsCode; ?></code>
-                            <form action="./web-2.php" method="POST">
+                            <form action="web-2.php" method="POST">
                                 <section class="javaScript-code">
                                     <label for="javaScript">Anything else you want to addit?</label>
                                     <br>
@@ -125,7 +133,7 @@
 
                 <div class="text-end">
                     <a class="nav-link text-secondary" href="https://www.facebook.com/N15RA">
-                        <img src="../images/icons/facebook.svg" alt="facebook icon" width="20">
+                        <img src="/images/icons/facebook.svg" alt="facebook icon" width="20">
                         <span>www.facebook.com/N15RA</span>
                     </a>
                 </div>
@@ -139,7 +147,7 @@
         </div>
     </footer>
 
-    <script src="./scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap.bundle.min.js"></script>
 </body>
 <script>
     let text = document.getElementById("change-me");
@@ -163,13 +171,19 @@
     btn3.onclick = turnTextSize;
 
     let btn4 = document.getElementById("do-something");
-    const turnText = () => <?php echo $jsCode; ?>;
+    const turnText = () => { 
+        if (<?php echo $check; ?>) {
+            alert('<?php echo $flag; ?>');
+        } else {
+            <?php echo $jsCode; ?>;
+        }
+    };
     btn4.onclick = turnText;
 
     // reset button
     let btn5 = document.getElementById("reset");
     const resetText = () => {
-        location.reload();
+        window.location.replace(window.location.href);  //刷新當前頁
     };
     btn5.onclick = resetText;
 </script>

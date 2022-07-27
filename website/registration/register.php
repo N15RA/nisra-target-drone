@@ -11,15 +11,15 @@
     <title>Register</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
 
     <!-- Custom styles for regisration -->
-    <link rel="stylesheet" href="../styles/registration.css">
+    <link rel="stylesheet" href="/styles/registration.css">
 </head>
 <body class="text-center">
     <main class="form-signin">
         <form action="register.php" method="POST">
-        <a href="/"><img class="mb-4 p-1 rounded-circle" src="../images/logos/logo-sm.png" alt="nisra logo" width="72" height="72" style="background-color: #242528;"></a>
+            <a href="/"><img class="mb-4 p-1 rounded-circle" src="/images/logos/logo-sm.png" alt="nisra logo" width="72" height="72" style="background-color: #242528;"></a>
             <h1 class="h3 mb-3 fw-normal">Register</h1>
 
             <div class="form-floating">
@@ -46,11 +46,11 @@
             </div>
         </form>
 
-        <?php include('errors.php'); ?>
+        <?php include('./errors.php'); ?>
         
         <hr>
 
-        <a class="text-decoration-none" href="./login.php">Already Member?</a>
+        <a class="text-decoration-none" href="/registration/login.php">Already Member?</a>
     </main>
 </body>
 </html>

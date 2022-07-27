@@ -1,21 +1,23 @@
 <?php
     $errors = array();
+	$upload_inform = array();
 
     if ($_FILES['my_file']['error'] === UPLOAD_ERR_OK){
-        echo 'file name: ' . $_FILES['my_file']['name'] . '<br/>';
-        echo 'file type: ' . $_FILES['my_file']['type'] . '<br/>';
-        echo 'file size: ' . ($_FILES['my_file']['size'] / 1024) . ' KB<br/>';
-        echo 'file temp name: ' . $_FILES['my_file']['tmp_name'] . '<br/>';
+		array_push($upload_inform, 'file name: '.$_FILES['my_file']['name']);
+		array_push($upload_inform, 'file type; '.$_FILES['my_file']['type']);
+		array_push($upload_inform, 'file_size: '.($_FILES['my_file']['size'] / 1024).'KB');
+		array_push($upload_inform, 'file temp name: '.$_FILES['my_file']['tmp_name']);
 
         # 檢查檔案是否已經存在
         if (file_exists('upload/' . $_FILES['my_file']['name'])){
-            echo 'file exist <br/>';
+			array_push($errors, 'file exist');
         } else {
-            $file = $_FILES['my_file']['tmp_name'];
-            $dest = 'upload/' . $_FILES['my_file']['name'];
+			$file = $_FILES['my_file']['tmp_name'];
+			$dest = $_SERVER['DOCUMENT_ROOT'].'/upload/' . $_FILES['my_file']['name'];
 
             # 將檔案移至指定位置
             move_uploaded_file($file, $dest);
+			array_push($upload_inform, $dest);
         }
     } else {
         array_push($errors, $_FILES['my_file']['error']);
@@ -166,10 +168,18 @@
 
             <!-- user setting block -->
             <section class="col-lg-9 d-flex flex-column p-3 text-center align-items-center justify-content-center" style="width: calc(100% - 280px); height: 100vh;">
-                <form method="post" enctype="multipart/form-data" action="upload.php">
+                <form method="post" enctype="multipart/form-data" action="fileUpload.php?id=<?php echo $id; ?>">
                     <input type="file" name="my_file">
                     <input type="submit" value="Upload">
                 </form>
+
+				<?php if (count($upload_inform) > 0) : ?>
+					<div class="inform">
+						<?php foreach ($upload_inform as $info) : ?>
+							<p class="text-warning"><?php echo $info ?></p>
+						<?php endforeach ?>
+					</div>
+				<?php endif ?>
 
                 <?php include('errors.php'); ?>
             </section>

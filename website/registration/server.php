@@ -8,7 +8,7 @@
     $errors = array();
 
     // connect to the database
-    $db = mysqli_connect('localhost', 'root', 'n15ra_TarGet_2021', 'nisra_target');
+    $db = mysqli_connect('localhost', 'nisra', 'n15ra_TarGet_2021', 'nisra_target');
 
     // check database connection
     if (!$db) {
